@@ -1,0 +1,74 @@
+version: '3'
+networks: 
+  cognizant_keep:
+    driver: bridge
+services:
+  UI:
+    image: krushilgoud/ui
+    container_name: ui-container
+    ports:
+      - 8000:80
+    networks:
+      - cognizant_keep
+  Authorization:
+    image: krushilgoud/authorization
+    container_name: authorization-container
+    ports:
+      - 8100:80
+    networks:
+      - cognizant_keep
+  Users:
+    image: krushilgoud/users
+    ports:
+      - 8200:80
+    container_name: users-container
+    links:
+      - MongoDB_Users
+      - Authorization
+    depends_on:
+      - MongoDB_Users
+      - Authorization
+    networks: 
+      - cognizant_keep
+  Notes:
+    image: krushilgoud/notes
+    ports:
+      - 8300:80
+    container_name: notes-container
+    links:
+      - Users
+      - MongoDB_Notes
+      - Authorization
+    depends_on:
+      - Users
+      - MongoDB_Notes
+    networks:
+      - cognizant_keep
+  MongoDB_Users:
+    image: bitnami/mongodb:latest
+    restart: always
+    ports:
+      - 27017:27017
+    container_name: mongo-users-container
+    volumes:
+      - /path/to/mongodb-persistence:/data/db
+    environment:
+      - MONGODB_DATABASE=UsersDB
+      - MONGODB_USERNAME=admin
+      - MONGODB_PASSWORD=admin
+    networks: 
+      - cognizant_keep
+  MongoDB_Notes:
+    image: bitnami/mongodb:latest
+    restart: always
+    ports:
+      - 27018:27017
+    container_name: mongo-notes-container
+    volumes:
+      - /path/to/mongodb-persistence:/data/db
+    environment:
+      - MONGODB_DATABASE=NotesDB
+      - MONGODB_USERNAME=admin
+      - MONGODB_PASSWORD=admin
+    networks: 
+      - cognizant_keep

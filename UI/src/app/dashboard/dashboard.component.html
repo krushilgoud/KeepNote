@@ -1,0 +1,20 @@
+<p></p>
+
+<app-logout></app-logout>
+
+<app-search></app-search>
+
+<p></p>
+
+<!-- NoteTakerComponent to be displayed as part of DashboardComponent -->
+<app-note-taker></app-note-taker>
+
+<p></p>
+
+<!-- Following router outlet displays the NoteViewComponent or ListViewComponent based on primary route -->
+<router-outlet></router-outlet>
+
+<p></p>
+
+<!-- Following named router outlet displays the EditViewComponent based on the secondary route -->
+<router-outlet name="noteEditOutlet"></router-outlet>

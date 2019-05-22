@@ -1,0 +1,48 @@
+.search-component {
+    text-align: center;
+    margin-top: 55px;
+}
+
+.filter-component {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.favorites-component {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.searchbar {
+    height: 30px;
+    width: 4000px;
+}
+
+.searchbutton {
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.filterbutton {
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.favoritesbutton {
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.sharedbutton {
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.clearbutton {
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+::ng-deep .mat-input-wrapper{
+    width:220px !important;
+}

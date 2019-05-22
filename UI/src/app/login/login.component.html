@@ -1,0 +1,30 @@
+<div class="form-container">
+    <div class="login">
+        <p class="title"><strong>LOGIN</strong></p>
+        <div class="username-field">
+            <mat-form-field>
+                <input matInput [formControl]="username" placeholder="Username" required>
+                <mat-error class="error-massage" *ngIf="username.invalid">{{showUsernameErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="password-field">
+            <mat-form-field>
+                <input matInput placeholder="Password" [formControl]="password" [type]="show ? 'text' : 'password'" required>
+                <mat-error class="error-message" *ngIf="password.invalid">{{showPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="login-button">
+            <button mat-raised-button color="primary" (click)='login()'>Login</button>
+        </div>
+
+        <div class="register-button">
+            <button mat-raised-button color="primary" (click)='navigateToRegister()'>Register</button>
+        </div>
+    </div>
+</div>
+
+<div class="status-message">
+    <strong *ngIf="submitMessage" class="error-message">{{submitMessage}}</strong>
+</div>

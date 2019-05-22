@@ -1,0 +1,29 @@
+<div class="keep-c-list-container">
+	<div class="classifier-not-started">
+		<div>
+			<mat-card>Not-Started</mat-card>
+		</div>
+	<!-- Populate notStartedNotes -->
+		<app-note [note]='note' *ngFor='let note of notStartedNotes'></app-note>
+	</div>
+</div>
+
+<div class="keep-c-list-container">
+	<div class="classifier-started">
+		<div>
+			<mat-card>Started</mat-card>
+		</div>
+		<!-- Populate startedNotes -->
+		<app-note [note]='note' *ngFor='let note of startedNotes'></app-note>
+	</div>
+</div>
+
+<div class="keep-c-list-container">
+	<div class="classifier-completed">
+		<div class="header-completed">
+			<mat-card>Completed</mat-card>
+		</div>
+		<!-- Populate completedNotes -->
+		<app-note [note]='note' *ngFor='let note of completedNotes'></app-note>
+	</div>
+</div>

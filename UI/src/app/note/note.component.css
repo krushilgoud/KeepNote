@@ -1,0 +1,11 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    margin: 10px
+}
+
+.cards-container {
+    display: inline-block;
+    align-content: space-around;
+    margin: 10px
+}

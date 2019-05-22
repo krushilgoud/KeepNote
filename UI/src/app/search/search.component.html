@@ -1,0 +1,17 @@
+<div class="search-component">
+    <mat-form-field>
+        <input matInput [formControl]="searchtext" placeholder="What are you looking for?" class="searchbar">
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="searchbutton" (click)='searchNotes()'>Search</button>
+    <button mat-raised-button color="primary" class="clearbutton" (click)='fetchAllNotes()'>Clear All</button><br>
+</div>
+
+<div class="filter-component">
+    <mat-form-field>
+        <mat-select name="editGroup" placeholder="Group by category" [(ngModel)]="selectedValue" (change)="filterNotes($event.value)">
+            <mat-option *ngFor="let group of groups" [value]="group">{{ group }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="favoritesbutton" (click)='getFavoriteNotes()'>Favorites</button>
+    <button mat-raised-button color="primary" class="sharedbutton" (click)='getSharedNotes()'>Shared</button>
+</div>

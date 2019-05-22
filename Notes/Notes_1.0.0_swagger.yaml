@@ -1,0 +1,373 @@
+swagger: '2.0'
+info:
+  description: |
+    This API lets users to manage their notes online.
+  version: 1.0.0
+  title: Notes
+  contact:
+    email: krushil.goud@cognizant.com
+    url: https://gitlab-cts.stackroute.in/krushil.goud
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+# host: localhost
+# basePath: /api/v1/notes
+tags:
+- name: Notes
+  description: Everything about managing notes online.
+# schemes:
+# - http
+paths:
+  /api/v1/notes:
+    post:
+      tags:
+      - Create notes
+      summary: Creates a new note
+      operationId: createaNote
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: userId
+        type: string
+        required: true
+        description: Represents the user id associated with the user to create a note againts the user
+      - in: header
+        name: Authorization
+        type: string
+        required: true
+        description: Represents the token for authorization to manage notes
+      - in: body
+        name: body
+        description: Note object that needs to be created
+        required: true
+        schema:
+          $ref: '#/definitions/Notes'
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/Notes'
+        403:
+          description: Forbidden
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: User is not authorized to perform the operation - Not authenticated || Note already exists
+                example: Not authenticated
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Generic server error
+                example: Internal server error
+    get:
+      tags:
+        - Retrieve notes
+      summary: A resource method to retrieve all the notes.
+      description: This resource method allows user to retrieve all the notes of the user provided the user id.
+      operationId: getNotes
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: userId
+        type: string
+        required: true
+        description: Represents the user id associated with the user and the note
+      - in: header
+        name: Authorization
+        type: string
+        required: true
+        description: Represents the token for authorization to manage notes
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Notes'
+            description: represents the array of notes retrieved
+        403:
+          description: Forbidden
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: User is not authorized to perform the operation - Not authenticated
+                example: Not authenticated
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Generic server error
+                example: Internal server error
+
+  /api/v1/notes/{noteId}:
+    put:
+      tags:
+      - Modify note
+      summary: Update note
+      description: This can only be done by the logged in user.
+      operationId: updateNote
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: noteId
+        in: path
+        description: id of the note that need to be updated
+        required: true
+        type: string
+      - in: header
+        name: Authorization
+        type: string
+        required: true
+        description: Represents the token for authorization to manage notes
+      - in: body
+        name: body
+        description: Updated note object
+        required: true
+        schema:
+          $ref: '#/definitions/Notes'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Notes'
+        403:
+          description: Forbidden
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: User is not authorized to perform the operation - Not authenticated
+                example: Not authenticated
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Generic server error
+                example: Internal server error
+    delete:
+      tags:
+      - Delete notes
+      summary: Delete note(s)
+      description: This operaition can only be done by a logged in user.
+      operationId: deleteNotes
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: noteId
+        in: path
+        description: id(s) of the note that need to be deleted. Can be a single id or comma separated if multipe
+        required: true
+        type: string
+      - in: header
+        name: Authorization
+        type: string
+        required: true
+        description: Represents the token for authorization to manage notes
+      responses:
+        200:
+          description: OK
+        403:
+          description: Forbidden
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: User is not authorized to perform the operation - Not authenticated
+                example: Not authenticated
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Generic server error
+                example: Internal server error
+  /api/v1/notes/search/{title}:
+    get:
+      tags:
+      - Search notes
+      summary: This resource method id used to search the notes using title as key. Only logged in user can perform this action
+      description: This method is used to search notes using title
+      operationId: searchByTitle
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: header
+        name: Authorization
+        type: string
+        required: true
+        description: Represents the token for authorization to manage notes
+      - in: path
+        name: title
+        type: string
+        required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Notes'
+            
+        403:
+          description: Forbidden
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: User is not authorized to perform the operation - Not authenticated
+                example: Not authenticated
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Generic server error
+                example: Internal server error
+  /api/v1/notes/manage/{noteIds}:
+    put:
+      tags:
+      - Update multiple notes
+      summary: 'This resource method is used to perform operations on multiple notes resources like - Grouping notes, Marking multiple notes as favourite and any other common update for the multiple resources need to be done'
+      description: This method is used to do any common update activity on multiple notes by passing comma separated id is notes
+      operationId: multiUpdate
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: header
+        name: Authorization
+        type: string
+        required: true
+        description: Represents the token for authorization to manage notes
+      - in: path
+        name: noteIds
+        type: string
+        description: Represents comma separated note ids of multiple notes.
+        required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Update succesful
+                example: Update successful
+        403:
+          description: Forbidden
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: User is not authorized to perform the operation - Not authenticated
+                example: Not authenticated
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Generic server error
+                example: Internal server error
+definitions:
+  Notes:
+    type: object
+    properties:
+      id:
+        type: number
+        description: Represents the note id
+        example: 1
+      title:
+        type: string
+        description: Represents the title of the note
+        example: Hey do first in the morning
+      text:
+        type: string
+        description: Represents the text of the note
+        example: There is a lot to do. Please get ready soon and start to Cafe Coffee Day
+      createdOn:
+        type: string
+        format: date
+        example: 'Wed Oct 18 2017 12:41:34 GMT+0000'
+      modifiedOn:
+        type: string
+        format: date
+        description: Represents the note data modified date
+        example: 'Wed Oct 18 2017 12:41:34 GMT+0000'
+      state:
+        type: string
+        description: Represents the status of the note
+        default: not-started
+        example: in-progress
+      group:
+        type: string
+        description: Grouping the notes according to a name
+        example: urgent
+      favourite:
+        type: string
+        description: Represents the favourite notes
+        example: yes
+      userId:
+        type: string
+        description: Represents the Id of the user associated with the note
+        example: 100
+      accessType:
+        type: string
+        description: Represents the type of access the user have over the current note
+        default: full-access
+        example: read-only
+      sharedBy:
+        type: string
+        description: Represents the username of the user who have shared this note
+        default: self
+        example: krushil.goud@cognizant.com
+      reminder:
+        type: string
+        description: Represents the date time at which remonder is set to notify the user
+        format: date
+        example: 'Wed Oct 18 2017 12:41:34 GMT+0000'
+        
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /krushil.goud/Notes/1.0.0
+schemes:
+ - https
+ - http

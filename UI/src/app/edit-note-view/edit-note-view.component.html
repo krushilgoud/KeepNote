@@ -1,0 +1,42 @@
+<label class="error-message">{{ errMessage }}</label>
+
+<div class='edit-note-view-form'>
+    <mat-form-field>
+        <input [(ngModel)]="note.title" name="editTitle" matInput placeholder="Title" type="text">
+    </mat-form-field>
+    <mat-form-field>
+        <textarea [(ngModel)]="note.text" name="editText" matInput placeholder="Text"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select name="editStatus" placeholder="Select State" [(ngModel)]="note.state">
+            <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select name="editGroup" placeholder="Select Group" [(ngModel)]="note.group">
+            <mat-option *ngFor="let group of groups" [value]="group">{{ group }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <input [(ngModel)]="note.reminder" name="reminder" matInput placeholder="Reminder" type="text">
+    </mat-form-field>
+    <mat-form-field>
+        <input [(ngModel)]="recipient" name="recipient" matInput placeholder="Share to..." type="text">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select name="editAccessType" placeholder="Select Access type" [(ngModel)]="note.accessType">
+            <mat-option *ngFor="let accessType of accessTypes" [value]="accessType">{{ accessType }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div class="keep-c-done-wrapper">
+    <button mat-button (click)="onDelete()">Delete</button>
+    <button mat-icon-button [ngStyle]="{'color':note.favourite === 'yes'?'red':'grey'}" (click)='toggleFavouriteNotes()'>
+        <mat-icon aria-label="heart icon-button">favorite</mat-icon>
+    </button>
+    <button mat-icon-button (click)='shareNote()'>
+        <mat-icon aria-label="share icon-button">share</mat-icon>
+    </button>
+    <button mat-button (click)="onSave()">Save</button>
+</div>

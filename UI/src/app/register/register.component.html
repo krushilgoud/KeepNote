@@ -1,0 +1,31 @@
+<div class="form-container">
+    <div class="register">
+        <p class="title"><strong>REGISTER</strong></p>
+        <div class="username-field">
+            <mat-form-field>
+                <input matInput placeholder="Username" [formControl]="emailaddress" required>
+                <mat-error *ngIf="emailaddress.invalid">{{emailValidationErrors()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="password-field">
+            <mat-form-field>
+                <input matInput placeholder="Password" [formControl]="password" [type]="password" required>
+                <mat-error *ngIf="password.invalid">{{passwordValidationErrors()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="register-button">
+            <button mat-raised-button color="primary" (click)='registerUser()'>Register</button>
+        </div>
+
+        <div class="login-button">
+            <button mat-raised-button color="primary" (click)='navigateToLogin()'>Login</button>
+        </div>
+    </div>
+</div>
+
+<div class="status-message">
+    <strong *ngIf="errorMessage" class="error-message">{{errorMessage}}</strong>
+    <strong *ngIf="registerSuccess" class="error-message">{{registerSuccess}}</strong>
+</div>

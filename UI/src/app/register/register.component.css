@@ -1,0 +1,44 @@
+.form-container {
+    display: block;
+    flex-direction: column;
+}
+
+.register {
+    margin: 20px 5px 20px 5px;
+    border: 2px solid;
+    box-shadow: 1px 2px 2px 2px #ccc;
+}
+
+.status-message {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 100%;
+    margin: 20px 5px 20px 5px;
+}
+
+.title {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 130%;
+    margin: 15px 5px 20px 5px;
+}
+
+.username-field {
+    text-align: center;
+    margin: 20px 5px 20px 5px;
+}
+
+.password-field {
+    text-align: center;
+    margin: 10px 5px 20px 5px;
+}
+
+.login-button {
+    text-align: center;
+    margin: 20px 5px 20px 5px;
+}
+
+.register-button {
+    text-align: center;
+    margin: 20px 5px 5px 5px;
+}

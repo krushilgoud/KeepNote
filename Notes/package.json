@@ -1,0 +1,45 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "Manage notes online",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha ./server/test/**/*.js",
+    "lint": "node_modules/.bin/eslint './server/**/*.js' --ignore-path .eslintignore"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab-cts.stackroute.in/krushil.goud/notes-final.git"
+  },
+  "keywords": [
+    "keep_notes",
+    "node",
+    "mongoose",
+    "mongoDB",
+    "microservices",
+    "docker",
+    "gitlab"
+  ],
+  "author": "krushil.goud",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^5.0.5",
+    "supertest": "^3.0.0",
+    "eslint": "^4.19.1"
+  },
+  "dependencies": {
+    "JSONStream": "^1.3.5",
+    "axios": "^0.18.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "ip": "^1.1.5",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.6",
+    "mongoose-auto-increment": "^5.0.1",
+    "socket.io-client": "^2.1.1",
+    "stream-to-mongo-db": "^1.5.0"
+  }
+}

@@ -1,0 +1,15 @@
+.classifier-not-started {
+    align-content: space-around;
+    margin: 10px;
+    background-color: red;
+}
+.classifier-completed {
+    align-content: space-around;
+    margin: 10px;
+    background-color: green;
+}
+.classifier-started {
+    align-content: space-around;
+    margin: 10px;
+    background-color: orange;
+}
